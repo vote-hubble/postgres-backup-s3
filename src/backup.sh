@@ -12,12 +12,12 @@ file_name="${POSTGRES_DATABASE}_$(date +"%Y-%m-%dT%H:%M:%S").dump"
 
 echo "Starting..."
 pg_dump --format=custom \
-        -h $POSTGRES_HOST \
-        -p $POSTGRES_PORT \
-        -U $POSTGRES_USER \
-        -d $POSTGRES_DATABASE \
-        $PGDUMP_EXTRA_OPTS \
-        > /backups/${file_name}
+  -h $POSTGRES_HOST \
+  -p $POSTGRES_PORT \
+  -U $POSTGRES_USER \
+  -d $POSTGRES_DATABASE \
+  $PGDUMP_EXTRA_OPTS \
+  > /backups/${file_name}
 echo "Finished..."
 
 if [ -n "$PASSPHRASE" ]; then
