@@ -17,6 +17,7 @@ ENV S3_ENDPOINT ''
 ENV CRON_SCHEDULE '* * * * *'
 ENV PASSPHRASE ''
 ENV BACKUP_RETENTION_IN_DAYS ''
+ENV CALLBACK_URL ''
 
 RUN apk update && apk add --no-cache postgresql-client gnupg s3cmd curl
 
