@@ -5,11 +5,11 @@ With Hubble you can manage your campaign for local, state, or national office al
 
 # Postgres Data Doctor
 
-This project provides Docker images to periodically back up a PostgreSQL database to a directory, and then sync the contents of the directory to an off-site S3 bucket. Restoring from a backup is also supported.
+This project uses docker to periodically backup a PostgreSQL database following the 3-2-1 backup strategy. Backups are saved to a mounted directory, and then synced an off-site S3 bucket. Restoring from a backup is also supported.
 
 This project is a fork of @eeshugerman's [postgres-backup-s3](https://github.com/eeshugerman/postgres-backup-s3), which was a fork and re-structuring of @schickling's [postgres-backup-s3](https://github.com/schickling/dockerfiles/tree/master/postgres-backup-s3) and [postgres-restore-s3](https://github.com/schickling/dockerfiles/tree/master/postgres-restore-s3).
 
-@jmadkins made the decision not to try and merge these changes into @eeshugerman's repo since it was such a change in backup/restore strategy.
+@jmadkins made the decision not to merge these changes into @eeshugerman's repo since it was a drastic change in implementation.
 
 # Usage
 
@@ -23,8 +23,8 @@ services:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
 
-  backup:
-    image: vote-hubble/psql-backups:16
+  doctor:
+    image: vote-hubble/psql-data-doctor:16
     environment:
       CRON_SCHEDULE: "0 4 * * *"
       S3_REGION: nyc1
