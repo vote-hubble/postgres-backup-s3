@@ -21,12 +21,8 @@ ENV CALLBACK_URL ''
 
 RUN apk update && apk add --no-cache postgresql-client gnupg s3cmd curl
 
-ADD src/env.sh env.sh
-ADD src/backup.sh backup.sh
-ADD src/restore.sh restore.sh
-
-RUN chmod +x env.sh backup.sh restore.sh
-
+ADD src/* /
+RUN chmod +x env.sh backup.sh restore.sh notify.sh sync.sh prune.sh
 RUN echo "${CRON_SCHEDULE} cd / && ./backup.sh" >> /var/spool/cron/crontabs/root
 
 CMD ["crond", "-f", "-d", "8"]

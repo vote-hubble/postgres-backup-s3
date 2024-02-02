@@ -39,11 +39,6 @@ if [ -z "$POSTGRES_PASSWORD" ]; then
   exit 1
 fi
 
-if [ -n "$S3_ACCESS_KEY_ID" ]; then
-  export AWS_ACCESS_KEY_ID=$S3_ACCESS_KEY_ID
-fi
-if [ -n "$S3_SECRET_ACCESS_KEY" ]; then
-  export AWS_SECRET_ACCESS_KEY=$S3_SECRET_ACCESS_KEY
-fi
 export AWS_DEFAULT_REGION=$S3_REGION
 export PGPASSWORD=$POSTGRES_PASSWORD
+echo -e "[default]\naccess_key = ${S3_ACCESS_KEY_ID?}\nsecret_key = ${S3_SECRET_ACCESS_KEY?}\nhost_base = ${S3_ENDPOINT?}\nhost_bucket = %(bucket)s.${S3_ENDPOINT?}\nuse_https = True\n" > /root/.s3cfg

@@ -27,20 +27,8 @@ if [ -n "$PASSPHRASE" ]; then
   echo "Encryption complete!"
 fi
 
-if [ -n "$BACKUP_RETENTION_IN_DAYS" ]; then
-  echo "Pruning backups older than ${BACKUP_RETENTION_IN_DAYS} days..."
-  find /backups/* -mtime +$BACKUP_RETENTION_IN_DAYS -exec rm {} \;
-fi
-
-echo "Syncing local backups with S3..."
-
-s3cmd sync --host=$S3_ENDPOINT --region=$S3_REGION --host-bucket=$S3_BUCKET \
-  --no-mime-magic --no-preserve --progress --stats --verbose \
-  /backups/ "s3://${S3_BUCKET}/${S3_PREFIX}/"
-
-if [ -n "$CALLBACK_URL" ]; then
-  echo "Notifying callback URL..."
-  curl -X POST -H "Content-Type: application/json" -d "{\"text\": \"Database backup completed - ${file_name}\"}" $CALLBACK_URL
-fi
+source ./prune.sh
+source ./sync.sh
+source ./notify.sh "Database backup completed - ${file_name}"
 
 echo "Backup of ${POSTGRES_DATABASE} completed successfully!"
