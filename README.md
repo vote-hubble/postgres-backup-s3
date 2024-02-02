@@ -1,4 +1,9 @@
-# Introduction
+<img src="https://cdn.hubble.vote/branding/mono-dark/logo-title.png" width="250px" alt="Hubble logo" />
+
+Hubble is the all-in-one solution for your campaigns contact management, financial accounting, and communication needs.
+With Hubble you can manage your campaign for local, state, or national office all in one place.
+
+# Postgres Data Doctor
 
 This project provides Docker images to periodically back up a PostgreSQL database to a directory, and then sync the contents of the directory to an off-site S3 bucket. Restoring from a backup is also supported.
 

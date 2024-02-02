@@ -1,8 +1,3 @@
-if [ -z "$CRON_SCHEDULE" ]; then
-  echo "You need to set the CRON_SCHEDULE environment variable."
-  exit 1
-fi
-
 if [ -z "$S3_BUCKET" ]; then
   echo "You need to set the S3_BUCKET environment variable."
   exit 1
@@ -37,8 +32,8 @@ fi
 if [ -z "$POSTGRES_PASSWORD" ]; then
   echo "You need to set the POSTGRES_PASSWORD environment variable."
   exit 1
+else
+  export PGPASSWORD=$POSTGRES_PASSWORD
 fi
 
-export AWS_DEFAULT_REGION=$S3_REGION
-export PGPASSWORD=$POSTGRES_PASSWORD
-echo -e "[default]\naccess_key = ${S3_ACCESS_KEY_ID?}\nsecret_key = ${S3_SECRET_ACCESS_KEY?}\nhost_base = ${S3_ENDPOINT?}\nhost_bucket = %(bucket)s.${S3_ENDPOINT?}\nuse_https = True\n" > /root/.s3cfg
+echo -e "[default]\naccess_key = ${S3_ACCESS_KEY_ID?}\nsecret_key = ${S3_SECRET_ACCESS_KEY?}\nhost_base = ${S3_ENDPOINT?}\nhost_bucket = %(bucket)s.${S3_ENDPOINT?}\nuse_https = True\ncache_file = /root/s3.cache\n" > /root/.s3cfg
