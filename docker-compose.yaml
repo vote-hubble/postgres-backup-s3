@@ -20,6 +20,7 @@ services:
       S3_BUCKET:
       S3_PREFIX:
       S3_ENDPOINT:
+      CALLBACK_URL:
       CRON_SCHEDULE: "* * * * *"
       BACKUP_RETENTION_IN_DAYS: 7
       PASSPHRASE: passphrase

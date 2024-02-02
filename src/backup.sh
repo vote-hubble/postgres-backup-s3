@@ -38,4 +38,9 @@ s3cmd sync --host=$S3_ENDPOINT --region=$S3_REGION --host-bucket=$S3_BUCKET \
   --no-mime-magic --no-preserve --progress --stats --verbose \
   /backups/ "s3://${S3_BUCKET}/${S3_PREFIX}/"
 
+if [ -n "$CALLBACK_URL" ]; then
+  echo "Notifying callback URL..."
+  curl -X POST -H "Content-Type: application/json" -d "{\"text\": \"Database backup completed - ${file_name}\"}" $CALLBACK_URL
+fi
+
 echo "Backup of ${POSTGRES_DATABASE} completed successfully!"

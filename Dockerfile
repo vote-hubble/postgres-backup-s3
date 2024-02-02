@@ -18,7 +18,7 @@ ENV CRON_SCHEDULE '* * * * *'
 ENV PASSPHRASE ''
 ENV BACKUP_RETENTION_IN_DAYS ''
 
-RUN apk update && apk add --no-cache postgresql-client gnupg s3cmd
+RUN apk update && apk add --no-cache postgresql-client gnupg s3cmd curl
 
 ADD src/env.sh env.sh
 ADD src/backup.sh backup.sh
