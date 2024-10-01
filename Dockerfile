@@ -16,13 +16,12 @@ ENV S3_PATH 'backups'
 ENV S3_ENDPOINT ''
 ENV CRON_SCHEDULE '* 1 * * *'
 ENV PASSPHRASE ''
-ENV BACKUP_RETENTION_IN_DAYS ''
 ENV CALLBACK_URL ''
 
 RUN apk update && apk add --no-cache postgresql-client gnupg s3cmd curl
 
 ADD src/* /
-RUN chmod +x env.sh backup.sh restore.sh notify.sh sync.sh prune.sh
+RUN chmod +x env.sh backup.sh restore.sh
 RUN echo "${CRON_SCHEDULE} cd / && ./backup.sh" >> /var/spool/cron/crontabs/root
 
 CMD ["crond", "-f", "-d", "8"]

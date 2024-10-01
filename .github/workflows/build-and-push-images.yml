@@ -21,6 +21,7 @@ jobs:
         include:
           - { postgres: 15, alpine: "3.17" }
           - { postgres: 16, alpine: "3.19" }
+          - { postgres: 17, alpine: "3.20" }
 
     steps:
       - name: Checkout repository

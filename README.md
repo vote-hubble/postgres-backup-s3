@@ -37,15 +37,12 @@ services:
       POSTGRES_DATABASE: dbname
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
-      BACKUP_RETENTION_IN_DAYS: 7 # optional
       PASSPHRASE: passphrase # optional
 ```
 
 - The `CRON_SCHEDULE` variable controls backup frequency.
 - If `PASSPHRASE` is provided, the backup will be encrypted using GPG.
 - Run `docker exec <container name> sh backup.sh` to trigger a backup ad-hoc.
-- If `BACKUP_RETENTION_IN_DAYS` is set, backups older than this many days will be deleted from the local directory.
-- Backups in S3 aren't managed via this tool
 - Set `CALLBACK_URL` to send a message to Slack
 
 ## Restore
